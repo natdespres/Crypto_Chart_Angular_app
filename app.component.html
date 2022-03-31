@@ -1,0 +1,49 @@
+<!-- <div (click)="testing()">{{title}}
+
+</div> -->
+<!-- <div *ngFor="let thing of things">{{thing.some}} {{thing.other}}
+</div> -->
+
+<mat-toolbar>
+  <span>Crypto Info</span>
+  <span class="example-spacer"></span>
+  <mat-form-field appearance="fill">
+    <mat-label>Select Coin</mat-label>
+    <mat-select [(value)]="selectedCoin" (selectionChange)="updatePage($event)">
+      <mat-option *ngFor="let coin of coinList; let i = index" [value]="i">
+        {{coin.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-toolbar>
+
+<table #theTable mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef> Symbol </th>
+    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+  </ng-container>
+
+  <!-- Current Price Column -->
+  <ng-container matColumnDef="current price">
+    <th mat-header-cell *matHeaderCellDef> Current Price (USD)</th>
+    <td mat-cell *matCellDef="let element"> {{element.current_price}} </td>
+  </ng-container>
+
+  <!-- Market Cap Column -->
+  <ng-container matColumnDef="market cap">
+    <th mat-header-cell *matHeaderCellDef> Market Cap (USD)</th>
+    <td mat-cell *matCellDef="let element"> {{element.market_cap}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<canvas baseChart [data]="lineChartData" [options]="lineChartOptions" [type]="lineChartType">
+</canvas>
+
+<!-- <canvas baseChart width="400" height="400"
+            [data]="lineChartData"
+            [options]="lineChartOptions"
+            [type]="lineChartType"></canvas> -->
